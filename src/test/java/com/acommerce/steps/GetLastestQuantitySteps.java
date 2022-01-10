@@ -30,13 +30,14 @@ public class GetLastestQuantitySteps {
 
   @Then("I should see {string} in product list")
   public void iShouldSeeInProductList(String sku) {
+    boolean foundProduct = false;
     var products = Arrays.asList(response.getBody().as(Product[].class));
     for(Product product: products) {
       if(product.getSku().equals(sku)) {
         System.out.println(product.toString());
-        assertThat(product.getSku(), equalTo(sku));
+        foundProduct = true;
       }
-
+      assertThat(foundProduct, equalTo("true"));
     }
   }
 
